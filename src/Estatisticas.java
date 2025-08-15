@@ -27,8 +27,20 @@ public class Estatisticas {
             partidas = Integer.parseInt(reader.readLine().split(": ")[1]);
             vitorias = Integer.parseInt(reader.readLine().split(": ")[1]);
             derrotas = Integer.parseInt(reader.readLine().split(": ")[1]);
-            sequenciaAtual = Integer.parseInt(reader.readLine().split(": ")[1]);
-            melhorSequencia = Integer.parseInt(reader.readLine().split(": ")[1]);
+            String linha;
+            // Se existir a 4ª linha, lê sequenciaAtual
+            if ((linha = reader.readLine()) != null) {
+                sequenciaAtual = Integer.parseInt(linha.split(": ")[1]);
+                // Se existir a 5ª linha, lê melhorSequencia
+                if ((linha = reader.readLine()) != null) {
+                    melhorSequencia = Integer.parseInt(linha.split(": ")[1]);
+                } else {
+                    melhorSequencia = 0;
+                }
+            } else {
+                sequenciaAtual = 0;
+                melhorSequencia = 0;
+            }
         } catch (Exception e) {
             partidas = 0;
             vitorias = 0;

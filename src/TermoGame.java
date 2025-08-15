@@ -28,7 +28,8 @@ public class TermoGame {
         if (palavra.equals(palavraSecreta)) {
             venceu = true;
             estatisticas.registrarVitoria();
-        } else if (tentativas.size() == maxTentativas) {
+        } 
+        if (!venceu && tentativas.size() == maxTentativas) {
             estatisticas.registrarDerrota();
         }
         return true;

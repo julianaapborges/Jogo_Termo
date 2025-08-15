@@ -58,6 +58,7 @@ public class TermoGUI extends JFrame {
         JPanel painelEntrada = new JPanel(new BorderLayout());
         campoEntrada = new JTextField();
         campoEntrada.setFont(new Font("Arial", Font.PLAIN, 24));
+        campoEntrada.addActionListener(this::processarTentativa); // Permite acionar o botão Tentar com Enter
         painelEntrada.add(new JLabel("Digite uma palavra de 5 letras:"), BorderLayout.NORTH);
         painelEntrada.add(campoEntrada, BorderLayout.CENTER);
 
