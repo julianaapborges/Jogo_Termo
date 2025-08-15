@@ -42,7 +42,8 @@ public class TermoGUI extends JFrame {
 
     private void configurarUI() {
         setTitle("TERMO - Jogo de Palavras");
-        setSize(500, 600);
+        setSize(700, 800);
+        setMinimumSize(new Dimension(500, 700));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
