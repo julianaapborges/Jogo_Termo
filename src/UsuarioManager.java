@@ -44,7 +44,8 @@ public class UsuarioManager {
     
         // Criar JDialog personalizado
         JDialog dialog = new JDialog(parent, "Login ou Cadastro", true);
-        dialog.setSize(400, 250);
+        dialog.setSize(400, 500);
+        dialog.setMinimumSize(new Dimension(300, 400));
         dialog.setLocationRelativeTo(parent);
         dialog.setResizable(true);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
