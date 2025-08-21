@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+// Classe utilitária para manipulação de palavras
 public class PalavraUtils {
     private List<String> palavras;
     private Random random = new Random();
 
+    // Construtor que carrega as palavras de um arquivo
     public PalavraUtils(String caminhoArquivo) {
         try {
             palavras = Files.lines(Paths.get(caminhoArquivo))
@@ -24,14 +26,17 @@ public class PalavraUtils {
         }
     }
 
+    // Método para sortear uma palavra aleatória
     public String sortearPalavra() {
         return palavras.get(random.nextInt(palavras.size())).toUpperCase();
     }
 
+    // Verifica se uma palavra está contida na lista
     public boolean contem(String palavra) {
         return palavra != null && palavras.contains(removerAcentos(palavra.toLowerCase()));
     }
 
+    // Remove acentos de um texto
     private String removerAcentos(String texto) {
         return Normalizer.normalize(texto, Normalizer.Form.NFD)
                 .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
@@ -39,6 +44,3 @@ public class PalavraUtils {
                 .replace("Ç", "C");
     }
 }
-
-
-

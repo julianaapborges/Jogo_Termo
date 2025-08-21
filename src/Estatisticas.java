@@ -1,5 +1,6 @@
 import java.io.*;
 
+// Classe responsável pelas estatísticas do jogo
 public class Estatisticas {
     private int partidas;
     private int vitorias;
@@ -14,6 +15,7 @@ public class Estatisticas {
         carregar();
     }
 
+    // Carrega as estatísticas do arquivo
     private void carregar() {
         partidas = 0;
         vitorias = 0;
@@ -23,6 +25,7 @@ public class Estatisticas {
         if (!arquivo.exists()) {
             return;
         }
+        // Lê o arquivo e inicializa os valores
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
@@ -47,6 +50,7 @@ public class Estatisticas {
         }
     }
 
+    // Salva as estatísticas no arquivo
     private void salvar() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo))) {
             writer.write("Partidas: " + partidas + "\n");
@@ -59,6 +63,7 @@ public class Estatisticas {
         }
     }
 
+    // Registra uma vitória
     public void registrarVitoria() {
         partidas++;
         vitorias++;
@@ -69,6 +74,7 @@ public class Estatisticas {
         salvar();
     }
 
+    // Registra uma derrota
     public void registrarDerrota() {
         partidas++;
         derrotas++;
@@ -76,6 +82,7 @@ public class Estatisticas {
         salvar();
     }
 
+    // Getters das estatísticas
     public int getPartidas() {
         return partidas;
     }
@@ -97,7 +104,3 @@ public class Estatisticas {
     }
 
 }
-
-
-
-

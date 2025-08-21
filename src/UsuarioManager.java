@@ -4,6 +4,7 @@ import java.util.Map;
 import javax.swing.*;
 import java.awt.*;
 
+// Classe responsável pela gestão de usuários
 public class UsuarioManager {
     private Map<String, String> usuarios = new HashMap<>();
     private final String ARQUIVO_USUARIOS = "usuarios.txt";
@@ -12,6 +13,7 @@ public class UsuarioManager {
         carregarUsuarios();
     }
 
+    // Carrega os usuários do arquivo
     private void carregarUsuarios() {
         File file = new File(ARQUIVO_USUARIOS);
         if (!file.exists()) return;
@@ -29,6 +31,7 @@ public class UsuarioManager {
         }
     }
 
+    // Salva os usuários no arquivo
     public void salvarUsuarios() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO_USUARIOS))) {
             for (Map.Entry<String, String> entry : usuarios.entrySet()) {
@@ -39,6 +42,7 @@ public class UsuarioManager {
         }
     }
 
+    // Faz o login ou cadastro do usuário
     public String loginOuCadastrar(JFrame parent) {
         final String[] usuarioRetornado = {null};
     
@@ -95,7 +99,8 @@ public class UsuarioManager {
         painelPrincipal.add(painelBotoes, BorderLayout.SOUTH);
     
         dialog.setContentPane(painelPrincipal);
-    
+
+        // Ação ao confirmar o login/cadastro
         Runnable acaoConfirmar = () -> {
             String usuario = campoUsuario.getText().trim();
             String senha = new String(campoSenha.getPassword());
@@ -137,7 +142,3 @@ public class UsuarioManager {
     }
     
 }
-
-
-
-

@@ -1,6 +1,13 @@
+// HUGO AUGUSTO SILVA DE FARIA 
+// JULIANA APARECIDA BORGES
+// LOURRANE LINDSAY ALVES EVARISTO
+// MATHEUS MOTA GOMES
+// SAMARA PALOMA LOPES AUGUSTO RIBEIRO
+
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+// Classe principal do jogo
 public class Main {
     public static void main(String[] args) {
         if (args.length < 1) {
@@ -42,6 +49,3 @@ public class Main {
         });
     }
 }
-
-
-

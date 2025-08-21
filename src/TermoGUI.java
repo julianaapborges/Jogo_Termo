@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+// Classe principal da interface gráfica do jogo
 public class TermoGUI extends JFrame {
     private TermoGame jogo;
     private Estatisticas estatisticas;
@@ -40,6 +41,7 @@ public class TermoGUI extends JFrame {
         }
     }
 
+    // Configurações da interface gráfica
     private void configurarUI() {
         setTitle("TERMO - Jogo de Palavras");
         setSize(700, 800);
@@ -109,22 +111,24 @@ public class TermoGUI extends JFrame {
         setVisible(true);
     }
 
+    // Inicia uma nova partida
     private void iniciarNovaPartida() {
         String palavraSecreta = palavraUtils.sortearPalavra();
         jogo = new TermoGame(palavraSecreta, estatisticas);
-        if (painelTentativas != null) {
+        if (painelTentativas != null) { // Limpa tentativas anteriores
             painelTentativas.removeAll();
             painelTentativas.revalidate();
             painelTentativas.repaint();
         }
 
-        if (campoEntrada != null) {
+        if (campoEntrada != null) { // Limpa campo de entrada
             campoEntrada.setEnabled(true);
             campoEntrada.setText("");
             campoEntrada.requestFocusInWindow();
         }
     }
 
+    // Processa a tentativa do jogador
     private void processarTentativa(ActionEvent e) {
         String tentativa = campoEntrada.getText().trim().toUpperCase();
 
@@ -152,18 +156,19 @@ public class TermoGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Fim de jogo! A palavra era: " + jogo.getPalavraSecreta());
             campoEntrada.setEnabled(false);
         }
-        
 
         atualizarInterface();
         campoEntrada.setText("");
     }
 
+    // Adiciona uma tentativa colorida ao painel
     private void adicionarTentativaColorida(String tentativa) {
         JPanel linha = new JPanel(new GridLayout(1, 5, 5, 5));
         linha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         char[] resultado = calcularResultado(tentativa, jogo.getPalavraSecreta());
 
+        // Adiciona as letras ao painel
         for (int i = 0; i < 5; i++) {
             JLabel letraLabel = new JLabel(String.valueOf(tentativa.charAt(i)), SwingConstants.CENTER);
             letraLabel.setOpaque(true);
@@ -171,6 +176,7 @@ public class TermoGUI extends JFrame {
             letraLabel.setPreferredSize(new Dimension(50, 50));
             letraLabel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 
+            // Define a cor de fundo com base no resultado
             switch (resultado[i]) {
                 case 'V' -> letraLabel.setBackground(Color.GREEN);
                 case 'A' -> letraLabel.setBackground(Color.YELLOW);
@@ -180,15 +186,18 @@ public class TermoGUI extends JFrame {
             linha.add(letraLabel);
         }
 
+        // Adiciona a linha de tentativas ao painel
         painelTentativas.add(linha);
         painelTentativas.revalidate();
         painelTentativas.repaint();
     }
 
+    // Calcula o resultado da tentativa comparando com a palavra secreta
     private char[] calcularResultado(String tentativa, String palavraSecreta) {
         char[] resultado = new char[5];
         boolean[] letraUsada = new boolean[5];
 
+        // Verifica letras corretas na posição
         for (int i = 0; i < 5; i++) {
             if (tentativa.charAt(i) == palavraSecreta.charAt(i)) {
                 resultado[i] = 'V';
@@ -198,6 +207,7 @@ public class TermoGUI extends JFrame {
             }
         }
 
+        // Verifica letras corretas fora da posição
         for (int i = 0; i < 5; i++) {
             if (resultado[i] == '-') {
                 char c = tentativa.charAt(i);
@@ -214,45 +224,38 @@ public class TermoGUI extends JFrame {
         return resultado;
     }
 
+    // Atualiza a interface gráfica com informações do jogo
     private void atualizarInterface() {
         labelTentativasRestantes.setText("Tentativas restantes: " + jogo.getTentativasRestantes());
     }
 
+    // Mostra as estatísticas do jogador
     private void mostrarEstatisticas() {
-    String nomeExibir = (usuarioAtual != null) ? usuarioAtual : "Convidado";
+        String nomeExibir = (usuarioAtual != null) ? usuarioAtual : "Convidado";
 
 
-    String mensagem = String.format(
-        "Jogador: %s\nPartidas: %d\nVitórias: %d\nDerrotas: %d\nSequência Atual: %d\nMelhor Sequência: %d",
-        nomeExibir,
-        estatisticas.getPartidas(),
-        estatisticas.getVitorias(),
-        estatisticas.getDerrotas(),
-        estatisticas.getSequenciaAtual(),
-        estatisticas.getMelhorSequencia());
+        String mensagem = String.format(
+            "Jogador: %s\nPartidas: %d\nVitórias: %d\nDerrotas: %d\nSequência Atual: %d\nMelhor Sequência: %d",
+            nomeExibir,
+            estatisticas.getPartidas(),
+            estatisticas.getVitorias(),
+            estatisticas.getDerrotas(),
+            estatisticas.getSequenciaAtual(),
+            estatisticas.getMelhorSequencia());
 
-    JOptionPane.showMessageDialog(this, mensagem, "Estatísticas", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensagem, "Estatísticas", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    // Faz o login do usuário
     private void fazerLogin() {
         String usuario = usuarioManager.loginOuCadastrar(this);
-        if (usuario != null) {
+        if (usuario != null) { 
             usuarioAtual = usuario;
             String caminhoEstatisticas = "estatisticas_" + usuarioAtual + ".dat";
             estatisticas = new Estatisticas(caminhoEstatisticas);
             JOptionPane.showMessageDialog(this, "Bem-vindo, " + usuarioAtual + "!");
+            iniciarNovaPartida(); // Reinicia a partida para usar as estatísticas do novo usuário
             atualizarInterface();
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
