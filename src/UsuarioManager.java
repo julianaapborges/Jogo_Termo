@@ -79,6 +79,8 @@ public class UsuarioManager {
     
         // Botões
         JButton btnConfirmar = new JButton("Entrar/Cadastrar");
+        // Faz o botão confirmar ser ativado ao pressionar Enter
+        dialog.getRootPane().setDefaultButton(btnConfirmar);
         JButton btnCancelar = new JButton("Sair");
     
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -94,16 +96,15 @@ public class UsuarioManager {
     
         dialog.setContentPane(painelPrincipal);
     
-        // Ação botão confirmar
-        btnConfirmar.addActionListener(e -> {
+        Runnable acaoConfirmar = () -> {
             String usuario = campoUsuario.getText().trim();
             String senha = new String(campoSenha.getPassword());
-    
+
             if (usuario.isEmpty() || senha.isEmpty()) {
                 JOptionPane.showMessageDialog(dialog, "Preencha todos os campos.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-    
+
             if (usuarios.containsKey(usuario)) {
                 if (usuarios.get(usuario).equals(senha)) {
                     usuarioRetornado[0] = usuario;
@@ -118,7 +119,11 @@ public class UsuarioManager {
                 campoUsuario.setText("");
                 campoSenha.setText("");
             }
-        });
+        };
+
+        btnConfirmar.addActionListener(e -> acaoConfirmar.run());
+        campoUsuario.addActionListener(e -> acaoConfirmar.run());
+        campoSenha.addActionListener(e -> acaoConfirmar.run());
     
         // Ação botão sair
         btnCancelar.addActionListener(e -> {

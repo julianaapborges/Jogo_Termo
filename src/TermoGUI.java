@@ -219,21 +219,19 @@ public class TermoGUI extends JFrame {
     }
 
     private void mostrarEstatisticas() {
-        String nomeExibir = (usuarioAtual != null) ? usuarioAtual : "Convidado";
+    String nomeExibir = (usuarioAtual != null) ? usuarioAtual : "Convidado";
 
-        String mensagem = String.format("""
-                Jogador: %s
-                Partidas: %d
-                Vitórias: %d
-                Derrotas: %d
-                """, nomeExibir,
-                estatisticas.getPartidas(),
-                estatisticas.getVitorias(),
-                estatisticas.getDerrotas(),
-                estatisticas.getSequenciaAtual(),
-                estatisticas.getMelhorSequencia());
 
-        JOptionPane.showMessageDialog(this, mensagem, "Estatísticas", JOptionPane.INFORMATION_MESSAGE);
+    String mensagem = String.format(
+        "Jogador: %s\nPartidas: %d\nVitórias: %d\nDerrotas: %d\nSequência Atual: %d\nMelhor Sequência: %d",
+        nomeExibir,
+        estatisticas.getPartidas(),
+        estatisticas.getVitorias(),
+        estatisticas.getDerrotas(),
+        estatisticas.getSequenciaAtual(),
+        estatisticas.getMelhorSequencia());
+
+    JOptionPane.showMessageDialog(this, mensagem, "Estatísticas", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void fazerLogin() {

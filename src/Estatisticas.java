@@ -15,38 +15,35 @@ public class Estatisticas {
     }
 
     private void carregar() {
+        partidas = 0;
+        vitorias = 0;
+        derrotas = 0;
+        sequenciaAtual = 0;
+        melhorSequencia = 0;
         if (!arquivo.exists()) {
-            partidas = 0;
-            vitorias = 0;
-            derrotas = 0;
-            sequenciaAtual = 0;
-            melhorSequencia = 0;
             return;
         }
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
-            partidas = Integer.parseInt(reader.readLine().split(": ")[1]);
-            vitorias = Integer.parseInt(reader.readLine().split(": ")[1]);
-            derrotas = Integer.parseInt(reader.readLine().split(": ")[1]);
             String linha;
-            // Se existir a 4ª linha, lê sequenciaAtual
-            if ((linha = reader.readLine()) != null) {
-                sequenciaAtual = Integer.parseInt(linha.split(": ")[1]);
-                // Se existir a 5ª linha, lê melhorSequencia
-                if ((linha = reader.readLine()) != null) {
-                    melhorSequencia = Integer.parseInt(linha.split(": ")[1]);
-                } else {
-                    melhorSequencia = 0;
+            while ((linha = reader.readLine()) != null) {
+                try {
+                    if (linha.startsWith("Partidas:")) {
+                        partidas = Integer.parseInt(linha.split(": ")[1]);
+                    } else if (linha.startsWith("Vitórias:")) {
+                        vitorias = Integer.parseInt(linha.split(": ")[1]);
+                    } else if (linha.startsWith("Derrotas:")) {
+                        derrotas = Integer.parseInt(linha.split(": ")[1]);
+                    } else if (linha.startsWith("Sequência Atual:")) {
+                        sequenciaAtual = Integer.parseInt(linha.split(": ")[1]);
+                    } else if (linha.startsWith("Melhor Sequência:")) {
+                        melhorSequencia = Integer.parseInt(linha.split(": ")[1]);
+                    }
+                } catch (Exception ex) {
+                    // Se der erro em uma linha, ignora só aquela linha
                 }
-            } else {
-                sequenciaAtual = 0;
-                melhorSequencia = 0;
             }
         } catch (Exception e) {
-            partidas = 0;
-            vitorias = 0;
-            derrotas = 0;
-            sequenciaAtual = 0;
-            melhorSequencia = 0;
+            // Se der erro geral, mantém os valores já lidos (ou zero)
         }
     }
 
@@ -55,6 +52,8 @@ public class Estatisticas {
             writer.write("Partidas: " + partidas + "\n");
             writer.write("Vitórias: " + vitorias + "\n");
             writer.write("Derrotas: " + derrotas + "\n");
+            writer.write("Sequência Atual: " + sequenciaAtual + "\n");
+            writer.write("Melhor Sequência: " + melhorSequencia + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,6 +95,7 @@ public class Estatisticas {
     public int getMelhorSequencia() {
         return melhorSequencia;
     }
+
 }
 
 

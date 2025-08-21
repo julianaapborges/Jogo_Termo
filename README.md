@@ -7,9 +7,11 @@ objetivo é descobrir a palavra secreta de 5 letras, considerando as dicas: ao i
 letra, o jogador irá ser informado se ela está na posição correta (indicado pela cor verde), na
 posição errada (cor amarela) ou se ela não compõem a palavra (cor cinza).
 
-## Como compilar e executar
+## Como compilar, gerar o executável e executar
 
 ```bash
 javac -d bin src/*.java
 
-java -cp bin Main palavras.txt
+jar cfe termo.jar Main -C bin .
+
+java -jar termo.jar palavras.txt
