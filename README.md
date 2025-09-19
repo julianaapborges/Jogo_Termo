@@ -1,17 +1,40 @@
-# TP02-POO
-Trabalho Prático 2 : Programação Orientada a Objetos 
+# 🎮 Jogo Termo
 
-Consiste em desenvolver o jogo TERMO, conhecido como também como Wordle em Português,
-utilizando a linguagem Java e a biblioteca Swing para interface gráfica. Neste jogo, o
-objetivo é descobrir a palavra secreta de 5 letras, considerando as dicas: ao inserir uma
-letra, o jogador irá ser informado se ela está na posição correta (indicado pela cor verde), na
-posição errada (cor amarela) ou se ela não compõem a palavra (cor cinza).
+Implementação do famoso jogo de palavras "Termo", desenvolvida em grupo para a disciplina de Programação Orientada a Objetos (POO) na UFOP.
 
-## Como compilar, gerar o executável e executar
+## ✨ Sobre o projeto
 
-```bash
-javac -d bin src/*.java
+- Interface gráfica intuitiva feita com Java Swing
+- Verificação de palavras em tempo real
+- Sistema de dicas por cores (estilo Wordle)
+- Princípios de POO aplicados: encapsulamento, herança e polimorfismo
 
-jar cfe termo.jar Main -C bin .
+## 🛠️ Tecnologias
 
-java -jar termo.jar palavras.txt
+- Java
+- Java Swing
+- Git
+
+## 🚀 Como rodar
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/julianaapborges/Jogo_Termo.git
+   cd Jogo_Termo
+   ```
+2. Compile os arquivos Java (crie a pasta bin se necessário):
+   ```bash
+   javac -d bin src/*.java
+   ```
+3. Gere o executável JAR:
+   ```bash
+   jar cfe termo.jar Main -C bin .
+   ```
+4. Execute o jogo (usando o arquivo de palavras):
+   ```bash
+   java -jar termo.jar palavras.txt
+   ```
+
+---
+
+Feito com 💙 para a disciplina de POO na UFOP.
